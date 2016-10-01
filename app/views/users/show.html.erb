@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <%= image_tag @user.image(:medium) %>
+</p>
+<p>
   <strong>Name:</strong>
   <%= @user.name %>
 </p>
@@ -20,10 +23,6 @@
   <%= @user.birthday %>
 </p>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @user.image(:medium) %>
-</p>
 
 
 <p>

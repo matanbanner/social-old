@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Name</th>
       <th>Email</th>
       <th>Country</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= image_tag user.image(:thumb) %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.country %></td>
