@@ -21,14 +21,10 @@
 </p>
 
 <p>
-  <strong>Profile picture:</strong>
-  <%= @user.profile_picture %>
+  <strong>Image:</strong>
+  <%= image_tag @user.image(:medium) %>
 </p>
 
-<p>
-  <strong>Cover photo:</strong>
-  <%= @user.cover_photo %>
-</p>
 
 <p>
   <strong>Status:</strong>

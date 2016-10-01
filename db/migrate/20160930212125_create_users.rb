@@ -5,8 +5,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email
       t.string :country
       t.date :birthday
-      t.string :profile_picture
-      t.string :cover_photo
       t.string :status
 
       t.timestamps

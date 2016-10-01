@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(version: 20160930224322) do
     t.string   "email"
     t.string   "country"
     t.date     "birthday"
-    t.string   "profile_picture"
-    t.string   "cover_photo"
     t.string   "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false

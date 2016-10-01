@@ -1,4 +1,4 @@
-<%= form_for(user) do |f| %>
+<%= form_for user, html: { multipart: true } do |f| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -32,13 +32,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :profile_picture %>
-    <%= f.text_field :profile_picture %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cover_photo %>
-    <%= f.text_field :cover_photo %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
   </div>
 
   <div class="field">
