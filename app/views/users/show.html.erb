@@ -23,9 +23,35 @@
   <%= @user.birthday %>
 </p>
 
+<p>
+  <strong>Followings:</strong>
+  <div class="followings">
+    <% @user.followings.each do |user| %>
+    <div class="floated_img">
+      <%= image_tag user.image(:thumb) %>
+    </div>
+    <% end %>
+  </div>
+</p>
+
 
 
 <p>
+  <div class="clear_left">
+    <strong>Followers:</strong>
+  </div>
+  <div class="followers">
+    <% @user.followers.each do |user| %>
+    <div class="floated_img">
+      <%= image_tag user.image(:thumb) %>
+    </div>
+    <% end %>
+  </div>
+</p>
+
+
+
+<p class="status">
   <strong>Status:</strong>
   <%= @user.status %>
 </p>
