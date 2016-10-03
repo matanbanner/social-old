@@ -18,7 +18,7 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.body %></td>
-        <td><%= post.publisher %></td>
+        <td><%= link_to image_tag(post.publisher.image(:thumb)), user_path(post.publisher) %></td>
         <td><%= post.shared %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
