@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       t.string :title
       t.text :body
       t.references :publisher, foreign_key: true
-      t.references :shared, foreign_key: true, default: nil
+      t.references :shared, foreign_key: true
 
       t.timestamps
     end
