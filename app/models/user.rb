@@ -8,9 +8,17 @@ class User < ApplicationRecord
   has_many :user_followings, class_name: 'UserFollow', foreign_key: :to_user_id
   has_many :followers, through: :user_followings, foreign_key: :to_user_id
 
+  has_many :posts, foreign_key: :publisher_id
+
   def follow(user)
     UserFollow.create(from_user_id: self.id, to_user_id: user.id)
   end
+
+  def post(title, body)
+    Post.create(title: title, body: body, publisher_id: self.id)
+  end
+
+
 
 
 
