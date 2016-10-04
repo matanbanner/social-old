@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161003163531) do
+ActiveRecord::Schema.define(version: 20161003210936) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20161003163531) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "encrypted_password"
   end
 
 end

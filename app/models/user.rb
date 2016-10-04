@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+  attr_accessor :password, :password_confirmation
+  validates :email, presence: true, :uniqueness => true, :format => /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
+  validates :password, confirmation: true, presence: true
+
+  before_save :encrypt_password
+  after_save :clear_password
+
   has_attached_file :image, styles: { medium: "160x160#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
@@ -10,14 +17,29 @@ class User < ApplicationRecord
 
   has_many :posts, foreign_key: :publisher_id
 
+
   def follow(user)
     UserFollow.create(from_user_id: self.id, to_user_id: user.id)
   end
 
   def post(title, body)
-    Post.create(title: title, body: body, publisher_id: self.id)
+    self.posts.create(title: title, body: body)
   end
 
+
+
+
+
+
+  def encrypt_password
+    if password.present?
+      self.encrypted_password = password
+    end
+  end
+
+  def clear_password
+    self.password = nil
+  end
 
 
 
