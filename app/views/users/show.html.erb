@@ -28,7 +28,7 @@
   <div class="followings">
     <% @user.followings.each do |user| %>
     <div class="floated_img">
-      <%= image_tag user.image(:thumb) %>
+      <%= user_image_link(user) %>
     </div>
     <% end %>
   </div>
@@ -43,7 +43,7 @@
   <div class="followers">
     <% @user.followers.each do |user| %>
     <div class="floated_img">
-      <%= image_tag user.image(:thumb) %>
+      <%= user_image_link(user) %>
     </div>
     <% end %>
   </div>

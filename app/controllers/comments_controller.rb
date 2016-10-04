@@ -16,10 +16,6 @@ class CommentsController < ApplicationController
 
   private
 
-  def set_comment
-      @comment = Comment.new(comment_params)
-  end
-
   def set_post
     @post = Post.find(params[:post_id])
   end
