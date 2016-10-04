@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :user_followings, class_name: 'UserFollow', foreign_key: :to_user_id, dependent: :destroy
   has_many :followers, through: :user_followings, foreign_key: :to_user_id
 
-  has_many :posts, foreign_key: :publisher_id
+  has_many :posts, foreign_key: :publisher_id, dependent: :destroy
 
 
   def follow(user)
