@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  get 'sessions/login'
+  post 'sessions/login_attempt'
+  get 'sessions/logout'
+  get 'sessions/home'
+  get 'sessions/profile'
+  get 'sessions/setting'
+
+
+
   resources :users
   resources :posts do
     resources :comments

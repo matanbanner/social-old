@@ -1,18 +1,19 @@
 class User < ApplicationRecord
   attr_accessor :password, :password_confirmation
-  validates :email, presence: true, :uniqueness => true, :format => /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
+  EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
+  validates :email, presence: true, uniqueness: true, format: EMAIL_REGEX
   validates :password, confirmation: true, presence: true
 
   before_save :encrypt_password
   after_save :clear_password
 
-  has_attached_file :image, styles: { medium: "160x160#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
+  has_attached_file :image, styles: { medium: "160x160#", thumb: "100x100#" }, default_url: "missing/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
-  has_many :user_follows, foreign_key: :from_user_id
+  has_many :user_follows, foreign_key: :from_user_id, dependent: :destroy
   has_many :followings, through: :user_follows, foreign_key: :from_user_id
 
-  has_many :user_followings, class_name: 'UserFollow', foreign_key: :to_user_id
+  has_many :user_followings, class_name: 'UserFollow', foreign_key: :to_user_id, dependent: :destroy
   has_many :followers, through: :user_followings, foreign_key: :to_user_id
 
   has_many :posts, foreign_key: :publisher_id
@@ -26,9 +27,21 @@ class User < ApplicationRecord
     self.posts.create(title: title, body: body)
   end
 
+  def self.authenticate(login_email="", login_password="")
+    puts "login_email=#{login_email}"
+    puts "login_password=#{login_password}"
+    user = User.find_by(email: login_email)
+    if user && user.match_password(login_password)
+      return user
+    else
+      return nil
+    end
+  end
 
 
-
+  def match_password(login_password="")
+    encrypted_password == login_password
+  end
 
 
   def encrypt_password
@@ -40,6 +53,12 @@ class User < ApplicationRecord
   def clear_password
     self.password = nil
   end
+
+
+
+
+
+
 
 
 

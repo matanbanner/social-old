@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :save_login_state, only: [:new, :create] #skip login if user is logged in already
 
   # GET /users
   # GET /users.json

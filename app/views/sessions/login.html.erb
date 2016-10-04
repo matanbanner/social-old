@@ -1,0 +1,18 @@
+<h1>Welcome to Social</h1>
+<div class= "Sign_Form">
+  <%= form_tag(:action => 'login_attempt') do %>
+
+  <div class="field">
+    <%= label_tag :email %>
+    <%= email_field_tag :login_email %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :password %>
+    <%= password_field_tag :login_password %>
+  </div>
+
+  <%= submit_tag("Log In") %>
+
+  <% end %>
+</div>
