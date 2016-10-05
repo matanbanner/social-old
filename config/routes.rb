@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
+
+  root 'home#index'
+
+
+  get 'home/sign_up'
   get 'home/index'
   get 'home/login'
   post 'home/login_attempt'
   get 'home/logout'
+
 
 
 

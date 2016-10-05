@@ -27,6 +27,23 @@ class User < ApplicationRecord
     self.posts.create(title: title, body: body)
   end
 
+
+  def followings_posts
+    posts=[]
+    followings = self.followings.includes(:posts)
+    followings.each{|following| posts += following.posts}
+    posts.sort_by!{|post| post.created_at}
+    posts
+  end
+
+
+
+
+
+
+
+
+
   def self.authenticate(login_email="", login_password="")
     puts "login_email=#{login_email}"
     puts "login_password=#{login_password}"
