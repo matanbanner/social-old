@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, only: [:search, :show]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user, only: [:search, :show, :follow, :unfollow]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
   before_action :save_login_state, only: [:new, :create]
 
   # GET /users
@@ -13,6 +13,19 @@ class UsersController < ApplicationController
   def search
     @users = User.where("name LIKE '%#{params[:name]}%'")
   end
+
+  # GET /user/follow/1
+  def follow
+    @current_user.follow(@user)
+    redirect_to user_path @user
+  end
+
+  # GET /user/follow/1
+  def unfollow
+    @current_user.unfollow(params[:id])
+    redirect_to user_path @user
+  end
+
 
   # GET /users/1
   # GET /users/1.json

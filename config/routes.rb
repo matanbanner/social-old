@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   post 'home/login_attempt'
   get 'home/logout'
 
+  get 'user/follow/:id', to: 'users#follow'
+  get 'user/unfollow/:id', to: 'users#unfollow'
+
+
 
 
 

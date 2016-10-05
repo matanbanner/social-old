@@ -19,8 +19,19 @@ class User < ApplicationRecord
   has_many :posts, foreign_key: :publisher_id, dependent: :destroy
 
 
-  def follow(user)
-    UserFollow.create(from_user_id: self.id, to_user_id: user.id)
+  def follow(user_or_id)
+    to_user_id = user_or_id.is_a?(User) ? user_or_id.id : user_or_id
+    UserFollow.create(from_user_id: self.id, to_user_id: to_user_id)
+  end
+
+  def unfollow(user_or_id)
+    to_user_id = user_or_id.is_a?(User) ? user_or_id.id : user_or_id
+    records = UserFollow.where(from_user_id: self.id, to_user_id: to_user_id).destroy_all
+  end
+
+  def following?(user_or_id)
+    to_user_id = user_or_id.is_a?(User) ? user_or_id.id : user_or_id
+    UserFollow.where(from_user_id: self.id, to_user_id: to_user_id).present?
   end
 
   def post(title, body)
