@@ -1,12 +1,31 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :save_login_state, only: [:new, :create] #skip login if user is logged in already
+  before_action :authenticate_user, only: [:search, :show, :follow, :unfollow]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
+  before_action :save_login_state, only: [:new, :create]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
   end
+
+  # GET /users/search
+  def search
+    @users = User.where("name LIKE '%#{params[:name]}%'")
+  end
+
+  # GET /user/follow/1
+  def follow
+    @current_user.follow(@user)
+    redirect_to user_path @user
+  end
+
+  # GET /user/follow/1
+  def unfollow
+    @current_user.unfollow(params[:id])
+    redirect_to user_path @user
+  end
+
 
   # GET /users/1
   # GET /users/1.json
@@ -25,16 +44,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    @current_user = User.new(user_params)
+    if @current_user.save
+      session[:user_id] = @current_user.id
+      redirect_to root_path, notice: 'User was successfully created.'
+    else
+      render :new
     end
   end
 

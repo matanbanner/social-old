@@ -9,6 +9,9 @@
   </head>
 
   <body>
-    <%= content_for?(:content) ? yield(:content) : yield %>
+    <% if @current_user%>
+      <%= render 'home/toolbar' %>
+    <% end %>
+    <%= yield %>
   </body>
 </html>

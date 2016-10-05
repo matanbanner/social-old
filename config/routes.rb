@@ -1,18 +1,30 @@
 Rails.application.routes.draw do
 
-  get 'sessions/login'
-  post 'sessions/login_attempt'
-  get 'sessions/logout'
-  get 'sessions/home'
-  get 'sessions/profile'
-  get 'sessions/setting'
-  get 'sessions/new_post'
-  get 'sessions/search'
+
+  root 'home#index'
+
+
+  get 'home/sign_up'
+  get 'home/index'
+  get 'home/login'
+  post 'home/login_attempt'
+  get 'home/logout'
+
+  get 'user/follow/:id', to: 'users#follow'
+  get 'user/unfollow/:id', to: 'users#unfollow'
 
 
 
 
-  resources :users
+
+
+
+  resources :users do
+    collection do
+      get :search
+    end
+  end
+
   resources :posts do
     resources :comments
   end

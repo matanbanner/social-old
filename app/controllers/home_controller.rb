@@ -1,14 +1,10 @@
-class SessionsController < ApplicationController
-  before_action :authenticate_user, only: [:home, :profile, :setting, :new_post, :search, :user_page]
+class HomeController < ApplicationController
+  before_action :authenticate_user, only: [:index]
   before_action :save_login_state, only: [:login, :login_attempt] #skip login if user is logged in already
 
-  def login
-    #show the view
-  end
 
-  def logout
-    session[:user_id] = nil
-    redirect_to action: :login
+  def login
+    #login form
   end
 
   def login_attempt
@@ -16,7 +12,7 @@ class SessionsController < ApplicationController
     if authorized_user
       session[:user_id] = authorized_user.id
       flash[:notice] = "Wow Welcome again, you logged in as #{authorized_user.name}"
-      redirect_to action: :home
+      redirect_to action: :index
     else
       flash[:notice] = "Invalid Username or Password"
       flash[:color]= "invalid"
@@ -24,26 +20,20 @@ class SessionsController < ApplicationController
     end
   end
 
-  def home
-     #stream
+  def logout
+    session[:user_id] = nil
+    redirect_to action: :login
   end
 
-  def profile
+
+  def sign_up
+    redirect_to controller: :users, action: :new
   end
 
-  def setting
-  end
 
-  def new_post
-  end
 
-  def user_page
-    @user = User.find(params[:id])
-
-  end
-
-  def search
-    @users = User.where("name LIKE '%#{params[:name]}%'")
+  def index
+    @posts = @current_user.followings_posts
   end
 
 
