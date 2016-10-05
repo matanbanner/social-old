@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :authenticate_user#, only: [:home, :profile, :setting, :new_post]
+  before_action :authenticate_user, only: [:home, :profile, :setting, :new_post, :search, :user_page]
   before_action :save_login_state, only: [:login, :login_attempt] #skip login if user is logged in already
 
   def login
@@ -35,6 +35,11 @@ class SessionsController < ApplicationController
   end
 
   def new_post
+  end
+
+  def user_page
+    @user = User.find(params[:id])
+
   end
 
   def search
