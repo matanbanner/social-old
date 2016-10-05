@@ -1,18 +1,20 @@
 Rails.application.routes.draw do
 
-  get 'sessions/login'
-  post 'sessions/login_attempt'
-  get 'sessions/logout'
-  get 'sessions/home'
-  get 'sessions/profile'
-  get 'sessions/setting'
-  get 'sessions/new_post'
-  get 'sessions/search'
+  get 'home/index'
+  get 'home/login'
+  post 'home/login_attempt'
+  get 'home/logout'
 
 
 
 
-  resources :users
+
+  resources :users do
+    collection do
+      get :search
+    end
+  end
+
   resources :posts do
     resources :comments
   end
