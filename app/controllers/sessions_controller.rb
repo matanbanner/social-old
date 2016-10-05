@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :authenticate_user, only: [:home, :profile, :setting]
+  before_action :authenticate_user#, only: [:home, :profile, :setting, :new_post]
   before_action :save_login_state, only: [:login, :login_attempt] #skip login if user is logged in already
 
   def login
@@ -25,13 +25,20 @@ class SessionsController < ApplicationController
   end
 
   def home
-    redirect_to @current_user
+     #stream
   end
 
   def profile
   end
 
   def setting
+  end
+
+  def new_post
+  end
+
+  def search
+    @users = User.where("name LIKE '%#{params[:name]}%'")
   end
 
 

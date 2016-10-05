@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'sessions/home'
   get 'sessions/profile'
   get 'sessions/setting'
+  get 'sessions/new_post'
+  get 'sessions/search'
+
 
 
 

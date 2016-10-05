@@ -1,2 +1,47 @@
-<h1>Sessions#home</h1>
-<p>Find me in app/views/sessions/home.html.erb</p>
+<p>
+  <%= image_tag @current_user.image(:medium) %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @current_user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @current_user.email %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @current_user.country %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @current_user.birthday %>
+</p>
+
+<p>
+  <strong>Followings:</strong>
+  <div class="followings">
+    <% @current_user.followings.each do |user| %>
+    <div class="floated_img">
+      <%= user_image_link(user) %>
+    </div>
+    <% end %>
+  </div>
+</p>
+
+
+<p>
+  <div class="clear_left">
+    <strong>Followers:</strong>
+  </div>
+  <div class="followers">
+    <% @current_user.followers.each do |user| %>
+    <div class="floated_img">
+      <%= user_image_link(user) %>
+    </div>
+    <% end %>
+  </div>
+</p>

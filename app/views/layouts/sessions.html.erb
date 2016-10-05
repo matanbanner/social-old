@@ -1,0 +1,8 @@
+<% if @current_user %>
+  <% content_for :content do %>
+    <%= render 'toolbar' %>
+    <%= yield %>
+  <% end %>
+<% end %>
+
+<%= render template: "layouts/application" %>

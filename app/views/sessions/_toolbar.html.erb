@@ -1,0 +1,39 @@
+<table>
+  <tr>
+    <td>
+      <%= user_image_tag(@current_user) %>
+    </td>
+    <td>
+      <%= @current_user.name %>
+    </td>
+    <td>
+      <%= link_to 'Home', action: :home %>
+    </td>
+    <td>
+      <%= link_to 'New Post', action: :new_post %>
+    </td>
+    <td>
+      <%= link_to 'New Event', action: :new_post %>
+    </td>
+    <td>
+      <%= link_to 'My Profile', user_path(@current_user) %>
+    </td>
+    <td>
+      <%= link_to 'Logout', action: 'logout'%>
+    </td>
+  </tr>
+  <rt>
+    <td>
+      <%= form_tag('/sessions/search', method: "get") do %>
+        <div class="field">
+          <%= label_tag :name, 'Find Users' %>
+          <%= text_field_tag :name %>
+        </div>
+        <div class="actions">
+          <%= submit_tag("Search") %>
+        </div>
+      <% end %>
+    </td>
+  </rt>
+
+</table>
